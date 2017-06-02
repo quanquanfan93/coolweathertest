@@ -23,6 +23,7 @@ import android.widget.Toast;
 import com.bumptech.glide.Glide;
 import com.coolweathertest.android.gson.Forecast;
 import com.coolweathertest.android.gson.Weather;
+import com.coolweathertest.android.service.AutoUpdateService;
 import com.coolweathertest.android.util.HttpUtil;
 import com.coolweathertest.android.util.Utility;
 
@@ -168,6 +169,8 @@ public class WeatherActivity extends AppCompatActivity {
                             editor.apply();
                             mWeatherId=weather.basic.weatherid;
                             showWeatherInfo(weather);
+                            Intent intent=new Intent(WeatherActivity.this, AutoUpdateService.class);
+                            startService(intent);
                         }else {
                             Toast.makeText(WeatherActivity.this,"获取天气信息失败",Toast.LENGTH_SHORT).show();
                         }
